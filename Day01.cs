@@ -13,7 +13,7 @@ namespace Advent2021
         public Day01(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.parseListOfInteger(_input);
+            Instructions = this.parseListOfInteger(Input);
         }
         public override Tuple<string, string> getResult()
         {

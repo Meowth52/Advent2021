@@ -3,21 +3,35 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.IO;
 
 namespace Advent2021
 {
     public partial class MainWindow : Window
     {
-        int LastDay = 1;
         public int ChoosenDay;
         private readonly MainView _mainView;
+
         public MainWindow()
         {
             InitializeComponent();
             _mainView = DataContext as MainView;
             InputBox.Focus();
-            ChoosenDay = LastDay;
+            ChoosenDay = this.ReadFile();
             DayBox.Text = ChoosenDay.ToString();
+        }
+        public int ReadFile()
+        {
+            int Day = 1;
+            if (File.Exists("Day.txt"))
+            {
+                Day = Int32.Parse(File.ReadAllText("Day.txt"));
+            }
+            return Day;
+        }
+        public void WriteFile(int day)
+        {
+            File.WriteAllText("Day.txt", day.ToString());
         }
 
         private void DayBoxKeyUp(object sender, KeyEventArgs e)
@@ -29,7 +43,10 @@ namespace Advent2021
                     int DayToChoose = 0;
                     DayToChoose = Int32.Parse(DayBox.Text);
                     if (DayToChoose > 0 && DayToChoose <= 25)
+                    {
                         ChoosenDay = DayToChoose;
+                        WriteFile(DayToChoose);
+                    }
                     DayBox.Text = ChoosenDay.ToString();
                 }
                 catch
