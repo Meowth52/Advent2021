@@ -64,8 +64,14 @@ namespace Advent2021
         public string getPartTwo()
         {
             int ReturnValue = 0;
-            int Oxygen = 0;
-            int Scrubb = 0;
+            int Oxygen = CheckLifeSupport(true);
+            int Scrubb = CheckLifeSupport(false);
+            ReturnValue = Oxygen * Scrubb;
+            return ReturnValue.ToString();
+        }
+        public int CheckLifeSupport(bool wantsMajority)
+        {
+            int Life = 0;
             List<bool[]> RemaingInstructions = new List<bool[]>(Instructions);
             for (int i = 0; i < Instructions[0].Count(); i++)
             {
@@ -76,9 +82,19 @@ namespace Advent2021
                     if (b[i])
                         NumberOfTrue++;
                 }
-                if (NumberOfTrue * 2 >= RemaingInstructions.Count)
+                if (wantsMajority)
                 {
-                    Keep = true;
+                    if (NumberOfTrue * 2 >= RemaingInstructions.Count)
+                    {
+                        Keep = true;
+                    }
+                }
+                else
+                {
+                    if (NumberOfTrue * 2 < RemaingInstructions.Count)
+                    {
+                        Keep = true;
+                    }
                 }
                 List<bool[]> NextInstructions = new List<bool[]>();
                 foreach (bool[] b in RemaingInstructions)
@@ -93,42 +109,10 @@ namespace Advent2021
             for (int i = 0; i < RemaingInstructions[0].Count(); i++)
             {
                 if (RemaingInstructions[0][i])
-                    Oxygen += (int)Math.Pow(2, (Instructions[0].Count() - 1) - i);
+                    Life += (int)Math.Pow(2, (Instructions[0].Count() - 1) - i);
             }
             RemaingInstructions = new List<bool[]>(Instructions);
-
-
-            // duplicate code should be method
-            for (int i = 0; i < Instructions[0].Count(); i++)
-            {
-                int NumberOfTrue = 0;
-                bool Keep = false;
-                foreach (bool[] b in RemaingInstructions)
-                {
-                    if (b[i])
-                        NumberOfTrue++;
-                }
-                if (NumberOfTrue * 2 < RemaingInstructions.Count)
-                {
-                    Keep = true;
-                }
-                List<bool[]> NextInstructions = new List<bool[]>();
-                foreach (bool[] b in RemaingInstructions)
-                {
-                    if (b[i] == Keep)
-                        NextInstructions.Add(b);
-                }
-                RemaingInstructions = new List<bool[]>(NextInstructions);
-                if (RemaingInstructions.Count == 1)
-                    break;
-            }
-            for (int i = 0; i < RemaingInstructions[0].Count(); i++)
-            {
-                if (RemaingInstructions[0][i])
-                    Scrubb += (int)Math.Pow(2, (Instructions[0].Count() - 1) - i);
-            }
-            ReturnValue = Oxygen * Scrubb;
-            return ReturnValue.ToString();
+            return Life;
         }
     }
 }
