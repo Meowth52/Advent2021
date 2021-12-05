@@ -87,7 +87,8 @@ namespace Advent2021
                                         }
                                         ReturnValue *= r;
                                     }
-                                    BingoCount.Add(Board.Key);
+                                    if (!BingoCount.Contains(Board.Key))
+                                        BingoCount.Add(Board.Key);
                                     if (BingoCount.Count == Boards.Count)
                                     {
                                         for (int i = 0; i < 5; i++)

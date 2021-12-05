@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Coordinate.cs" />
     <Compile Include="Day.cs" />
     <Compile Include="Day02.cs" />
     <Compile Include="Day25.cs" />
