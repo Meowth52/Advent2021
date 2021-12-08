@@ -21,15 +21,45 @@ namespace Advent2021
         }
         public string getPartOne()
         {
-            int ReturnValue = 0;
+            int ReturnValue = 1000000;
+            for (int i = 0; i < Instructions.Count(); i++)
+            {
+                int Fuel = 0;
+                for (int ii = 0; ii < Instructions.Count(); ii++)
+                {
+                    if (i != ii)
+                        Fuel += Math.Abs(Instructions[i] - Instructions[ii]);
 
+                }
+                if (Fuel < ReturnValue)
+                    ReturnValue = Fuel;
+            }
             return ReturnValue.ToString();
         }
         public string getPartTwo()
         {
-            int ReturnValue = 0;
+            int ReturnValue = 1000000000;
+            for (int i = 0; i < Instructions.Count(); i++)
+            {
+                int Fuel = 0;
+                for (int ii = 0; ii < Instructions.Count(); ii++)
+                {
+                    if (i != ii)
+                        Fuel += fib(Math.Abs(Instructions[i] - Instructions[ii]));
+
+                }
+                if (Fuel < ReturnValue)
+                    ReturnValue = Fuel;
+            }
 
             return ReturnValue.ToString();
+        }
+        public int fib(int input)
+        {
+            int ReturnValue = 0;
+            for (int i = 0; i <= input; i++)
+                ReturnValue += i;
+            return ReturnValue;
         }
     }
 }
