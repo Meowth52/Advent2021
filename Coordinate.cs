@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Advent2020
+namespace Advent2021
 {
     public class Coordinate : IEquatable<Coordinate>, IComparable<Coordinate>
     {
@@ -43,6 +43,16 @@ namespace Advent2020
                     this.AddTo(new Coordinate(0, -1 * n));
                     break;
             }
+        }
+        public List<Coordinate> GetNeihbours()
+        {
+            List<Coordinate> ReturnList = new List<Coordinate>();
+            ReturnList.Add(this.GetSum(new Coordinate(1 * 1, 0)));
+            ReturnList.Add(this.GetSum(new Coordinate(-1 * 1, 0)));
+            ReturnList.Add(this.GetSum(new Coordinate(0, 1 * 1)));
+            ReturnList.Add(this.GetSum(new Coordinate(0, -1 * 1)));
+
+            return ReturnList;
         }
         public Coordinate GetSum(Coordinate A)
         {
