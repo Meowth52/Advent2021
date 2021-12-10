@@ -10,10 +10,12 @@ namespace Advent2021
     public class Day10 : Day
     {
         List<string> Instructions;
+        List<string> LessWrong;
         public Day10(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
             Instructions = this.parseStringArray(Input).ToList();
+            LessWrong = new List<string>();
         }
         public override Tuple<string, string> getResult()
         {
@@ -24,6 +26,7 @@ namespace Advent2021
             int ReturnValue = 0;
             foreach (string s in Instructions)
             {
+                bool StringOk = true;
                 Dictionary<char, int> Points = new Dictionary<char, int>()
                 {
                     {')',3 },
@@ -48,6 +51,7 @@ namespace Advent2021
                         else
                         {
                             ReturnValue += Points[c];
+                            StringOk = false;
                             break;
                         }
                     }
@@ -56,14 +60,39 @@ namespace Advent2021
                         Tracker.Add(c);
                     }
                 }
-                ;
+
+                if (StringOk) 
+                { 
+                    char[] Meh = Tracker.ToArray();
+                    Array.Reverse(Meh);
+                    LessWrong.Add(new string(Meh));
+                }
             }
             return ReturnValue.ToString();
         }
         public string getPartTwo()
         {
-            int ReturnValue = 0;
-
+            long ReturnValue = 0;
+            Dictionary<char, int> Points = new Dictionary<char, int>()
+            {
+                {'(',1 },
+                {'[',2 },
+                {'{',3 },
+                { '<',4 }
+            };
+            List<long> PointList = new List<long>();
+            foreach(string s in LessWrong)
+            {
+                long Point = 0;
+                foreach(char c in s) 
+                { 
+                    Point *=5;
+                    Point+=Points[c];
+                }
+                PointList.Add(Point);
+            }
+            PointList.Sort();
+            ReturnValue = PointList[PointList.Count / 2];
             return ReturnValue.ToString();
         }
     }
