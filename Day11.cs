@@ -9,11 +9,19 @@ namespace Advent2021
 {
     public class Day11 : Day
     {
-        List<int> Instructions;
+        Dictionary<Coordinate,int> Octopussy;
+        List<Coordinate> OctoKeys;
         public Day11(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.parseListOfInteger(Input);
+            string[]  rows = this.parseStringArray(Input);
+            Octopussy = new Dictionary<Coordinate, int>();;
+            for(int y = 0;y<rows.Length;y++)
+                for(int x= 0;x<rows[0].Length;x++)
+                        Octopussy.Add(new Coordinate(x,y),Int32.Parse(rows[y][x].ToString()));
+            OctoKeys = new List<Coordinate>();
+            foreach(KeyValuePair<Coordinate,int> c in Octopussy)
+                OctoKeys.Add(c.Key);
         }
         public override Tuple<string, string> getResult()
         {
@@ -22,7 +30,53 @@ namespace Advent2021
         public string getPartOne()
         {
             int ReturnValue = 0;
-
+            List<Coordinate> Flashes = new List<Coordinate>();
+            List<Coordinate> Flashed = new List<Coordinate>();
+            int i = 0;
+            while(true) 
+            { 
+                foreach(Coordinate c in OctoKeys) 
+                { 
+                    Octopussy[c]++;
+                    if(Octopussy[c] > 9) 
+                    { 
+                        Flashes.Add(c);
+                        }
+                }
+                Flashed=  new List<Coordinate>( Flashes);
+                while (Flashes.Count>0) 
+                {
+                    List<Coordinate> NextFlashes = new List<Coordinate>();
+                    foreach(Coordinate c in Flashes)
+                    {
+                        foreach(Coordinate n in c.GetNeihbours(Diagonals:  true))
+                        {
+                            if (Octopussy.ContainsKey(n)) 
+                            { 
+                                Octopussy[n]++;
+                                if(Octopussy[n]>9&& !Flashed.Contains(n))
+                                {
+                                    NextFlashes.Add(n);
+                                    Flashed.Add(n);
+                                }
+                            }
+                        }
+                    }
+                    Flashes = new List<Coordinate>(NextFlashes);
+                }
+                foreach(Coordinate c in OctoKeys)
+                    if (Octopussy[c] > 9) 
+                    { 
+                        Octopussy[c]=0;
+                        ReturnValue++;
+                        }
+                i++;
+                if (Flashed.Count == 100) 
+                { 
+                    ReturnValue = i;
+                    break;
+                    }
+            }
             return ReturnValue.ToString();
         }
         public string getPartTwo()

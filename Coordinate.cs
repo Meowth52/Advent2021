@@ -44,14 +44,20 @@ namespace Advent2021
                     break;
             }
         }
-        public List<Coordinate> GetNeihbours()
+        public List<Coordinate> GetNeihbours(bool Diagonals = false)
         {
             List<Coordinate> ReturnList = new List<Coordinate>();
-            ReturnList.Add(this.GetSum(new Coordinate(1 * 1, 0)));
-            ReturnList.Add(this.GetSum(new Coordinate(-1 * 1, 0)));
-            ReturnList.Add(this.GetSum(new Coordinate(0, 1 * 1)));
-            ReturnList.Add(this.GetSum(new Coordinate(0, -1 * 1)));
-
+            ReturnList.Add(this.GetSum(new Coordinate(1, 0)));
+            ReturnList.Add(this.GetSum(new Coordinate(-1, 0)));
+            ReturnList.Add(this.GetSum(new Coordinate(0, 1)));
+            ReturnList.Add(this.GetSum(new Coordinate(0, -1)));
+            if (Diagonals)
+            {
+                ReturnList.Add(this.GetSum(new Coordinate(1, 1)));
+                ReturnList.Add(this.GetSum(new Coordinate(-1, -1)));
+                ReturnList.Add(this.GetSum(new Coordinate(-1, 1)));
+                ReturnList.Add(this.GetSum(new Coordinate(1, -1)));
+            }
             return ReturnList;
         }
         public Coordinate GetSum(Coordinate A)
