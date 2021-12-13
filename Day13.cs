@@ -49,13 +49,16 @@ namespace Advent2021
             int ReturnValue = 0;
             this.Fold(Instructions[0].Axis, Instructions[0].Amount);
             ReturnValue = TheGrid.Count;
-            return ReturnValue.ToString() + Print();
+            return ReturnValue.ToString();
         }
         public string getPartTwo()
         {
             int ReturnValue = 0;
-
-            return ReturnValue.ToString();
+            for (int i = 1; i < Instructions.Count; i++)
+            {
+                Fold(Instructions[i].Axis, Instructions[i].Amount);
+            }
+            return Print();
         }
         public void Fold(char axis, int amount)
         {
@@ -70,7 +73,7 @@ namespace Advent2021
                     if (TheGrid.ContainsKey(NewCoordinate))
                         Value += TheGrid[NewCoordinate];
                 }
-                else if (k.Key.y > amount)
+                else if (axis == 'y' && k.Key.y > amount)
                 {
                     NewCoordinate = new Coordinate(k.Key.x, amount - (k.Key.y - amount));
                     if (TheGrid.ContainsKey(NewCoordinate))
