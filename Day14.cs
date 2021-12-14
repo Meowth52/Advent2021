@@ -18,7 +18,7 @@ namespace Advent2021
         public Day14(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            string[] splitted = this.parseStringArray(Input);
+            string[] splitted = this.ParseStringArray(Input);
             string startString = splitted[0];
             First = startString.First();
             Last = startString.Last();
@@ -48,11 +48,11 @@ namespace Advent2021
                 }
             }
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return getPartOne();
+            return GetPartOne();
         }
-        public Tuple<string, string> getPartOne()
+        public Tuple<string, string> GetPartOne()
         {
             long ReturnValue = 0;
             long ReturnValue2 = 0;
@@ -68,7 +68,7 @@ namespace Advent2021
             ReturnValue2 = ScoreCount();
             return Tuple.Create(ReturnValue.ToString(), ReturnValue2.ToString());
         }
-        public string getPartTwo() //nope
+        public string GetPartTwo() //nope
         {
             int ReturnValue = 0;
 

@@ -16,7 +16,7 @@ namespace Advent2021
         public Day04(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.parseListOfIntegerLists(Input);
+            Instructions = this.ParseListOfIntegerLists(Input);
             RandomNumbers = new List<int>(Instructions[0]);
             Instructions.RemoveAt(0);
             Boards = new Dictionary<int, List<Dictionary<int, bool>>>();
@@ -51,11 +51,11 @@ namespace Advent2021
 
             Boards[BoardIterator].AddRange(Verticals);
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             ReturnValue2 = 0;
@@ -110,7 +110,7 @@ namespace Advent2021
             }
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = ReturnValue2;
 

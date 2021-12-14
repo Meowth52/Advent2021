@@ -16,14 +16,14 @@ namespace Advent2021
         public Day13(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            string[] Splitted = this.parseStringArray(Input);
+            string[] Splitted = this.ParseStringArray(Input);
             TheGrid = new Dictionary<Coordinate, int>();
             Instructions = new List<(char Axis, int Amount)>();
             MaxX = 0;
             MaxY = 0;
             foreach (string s in Splitted)
             {
-                List<int> Ints = this.parseListOfInteger(s);
+                List<int> Ints = this.ParseListOfInteger(s);
                 if (Ints.Count == 2)
                 {
                     TheGrid.Add(new Coordinate(Ints[0], Ints[1]), 0);
@@ -40,18 +40,18 @@ namespace Advent2021
             MaxX++;
             MaxY++;
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             this.Fold(Instructions[0].Axis, Instructions[0].Amount);
             ReturnValue = TheGrid.Count;
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = 0;
             for (int i = 1; i < Instructions.Count; i++)

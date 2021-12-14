@@ -13,7 +13,7 @@ namespace Advent2021
         public Day12(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            string[] Strings = this.parseStringArray(Input);
+            string[] Strings = this.ParseStringArray(Input);
             Possibilities = new Dictionary<string, List<string>>();
             foreach (string s in Strings)
             {
@@ -29,11 +29,11 @@ namespace Advent2021
                 }
             }
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             List<List<string>> PossiblePath = new List<List<string>>();
@@ -61,7 +61,7 @@ namespace Advent2021
             }
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = 0;
             List<(List<string> path, bool Twice)> PossiblePath = new List<(List<string> path, bool Twice)>();

@@ -67,7 +67,7 @@ namespace Advent2021
                 Tuple<string, string> OutputTuple;
                 await Task.Run(() =>
                 {
-                    OutputTuple = d.getResult();
+                    OutputTuple = d.GetResult();
                     stopWatch.Stop();
                     TimeSpan ts = stopWatch.Elapsed;
                     _mainView.OutText = "Del 1: " + OutputTuple.Item1 + " och del 2: " + OutputTuple.Item2 + " Executed in " + ts.TotalMilliseconds.ToString() + " ms";

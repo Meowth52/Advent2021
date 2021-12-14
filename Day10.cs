@@ -14,14 +14,14 @@ namespace Advent2021
         public Day10(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.parseStringArray(Input).ToList();
+            Instructions = this.ParseStringArray(Input).ToList();
             LessWrong = new List<string>();
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             foreach (string s in Instructions)
@@ -61,8 +61,8 @@ namespace Advent2021
                     }
                 }
 
-                if (StringOk) 
-                { 
+                if (StringOk)
+                {
                     char[] Meh = Tracker.ToArray();
                     Array.Reverse(Meh);
                     LessWrong.Add(new string(Meh));
@@ -70,7 +70,7 @@ namespace Advent2021
             }
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             long ReturnValue = 0;
             Dictionary<char, int> Points = new Dictionary<char, int>()
@@ -81,13 +81,13 @@ namespace Advent2021
                 { '<',4 }
             };
             List<long> PointList = new List<long>();
-            foreach(string s in LessWrong)
+            foreach (string s in LessWrong)
             {
                 long Point = 0;
-                foreach(char c in s) 
-                { 
-                    Point *=5;
-                    Point+=Points[c];
+                foreach (char c in s)
+                {
+                    Point *= 5;
+                    Point += Points[c];
                 }
                 PointList.Add(Point);
             }

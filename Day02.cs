@@ -14,7 +14,7 @@ namespace Advent2021
         public Day02(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.parseStringArray(Input);
+            Instructions = this.ParseStringArray(Input);
             Commands = new List<(char Direction, int Amount)>();
             foreach (string s in Instructions)
             {
@@ -23,11 +23,11 @@ namespace Advent2021
                 Commands.Add((Direction, Amount));
             }
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             (int x, int y) Position = (0, 0);
@@ -51,7 +51,7 @@ namespace Advent2021
             ReturnValue = Position.x * Position.y;
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = 0;
             (int x, int y) Position = (0, 0);

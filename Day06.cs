@@ -15,7 +15,7 @@ namespace Advent2021
         public Day06(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.parseListOfInteger(Input);
+            Instructions = this.ParseListOfInteger(Input);
             GroupedFish = new Dictionary<int, long>();
             ReturnValue2 = 0;
             for (int i = 0; i < 10; i++)
@@ -23,11 +23,11 @@ namespace Advent2021
                 GroupedFish.Add(i, Instructions.Count(x => x == i));
             }
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             long ReturnValue = 0;
             for (int i = 0; i < 256; i++)
@@ -45,7 +45,7 @@ namespace Advent2021
             ReturnValue2 = GroupedFish.Values.Sum();
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             long ReturnValue = ReturnValue2;
 

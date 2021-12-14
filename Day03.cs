@@ -13,7 +13,7 @@ namespace Advent2021
         public Day03(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            string[] halfway = this.parseStringArray(Input);
+            string[] halfway = this.ParseStringArray(Input);
             Instructions = new List<bool[]>();
             foreach (string s in halfway)
             {
@@ -26,11 +26,11 @@ namespace Advent2021
                 Instructions.Add(boolList.ToArray());
             }
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             int[] GammaCount = new int[Instructions[0].Count()];
@@ -61,7 +61,7 @@ namespace Advent2021
             ReturnValue = GammaValue * EpsilonValue;
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = 0;
             int Oxygen = CheckLifeSupport(true);

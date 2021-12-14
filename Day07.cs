@@ -13,13 +13,13 @@ namespace Advent2021
         public Day07(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.parseListOfInteger(Input);
+            Instructions = this.ParseListOfInteger(Input);
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 1000000;
             for (int i = 0; i < Instructions.Count(); i++)
@@ -36,7 +36,7 @@ namespace Advent2021
             }
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = 1000000000;
             for (int i = 0; i < Instructions.Count(); i++)

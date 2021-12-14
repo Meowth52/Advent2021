@@ -18,16 +18,16 @@ namespace Advent2021
         public Day05(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            List<int> finddMax = this.parseListOfInteger(Input);
+            List<int> finddMax = this.ParseListOfInteger(Input);
             Max = finddMax.Max() + 1;
             PartOne = 0;
             TheGrid = new int[Max, Max];
             Lines = new List<List<(int x, int y)>>();
             NaughtyLines = new List<List<(int x, int y)>>();
-            instructions = this.parseStringArray(Input);
+            instructions = this.ParseStringArray(Input);
             foreach (string s in instructions)
             {
-                List<int> Row = this.parseListOfInteger(s);
+                List<int> Row = this.ParseListOfInteger(s);
                 List<(int x, int y)> Line = new List<(int x, int y)>();
                 if (Row[0] == Row[2])
                 {
@@ -85,11 +85,11 @@ namespace Advent2021
                 }
             }
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             foreach (List<(int x, int y)> Line in Lines)
@@ -104,7 +104,7 @@ namespace Advent2021
             PartOne = ReturnValue;
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = PartOne;
             foreach (List<(int x, int y)> Line in NaughtyLines)

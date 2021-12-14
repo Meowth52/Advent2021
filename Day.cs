@@ -16,7 +16,7 @@ namespace Advent2021
         {
             this._mainView = mainView;
         }
-        public abstract Tuple<string, string> getResult();
+        public abstract Tuple<string, string> GetResult();
         public string CheckFile(string _input)
         {
             string Input = "";
@@ -35,16 +35,16 @@ namespace Advent2021
             return Input;
         }
 
-        public string parseJustOneLine(string input)
+        public string ParseJustOneLine(string input)
         {
             return input.Replace("\r\n", "");
         }
-        public string[] parseStringArray(string input)
+        public string[] ParseStringArray(string input)
         {
             string Input = input.Replace("\r\n", "_");
             return Input.Split(new[] { '_' }, StringSplitOptions.RemoveEmptyEntries);
         }
-        public List<string[]> parseListOfStringArrays(string input)
+        public List<string[]> ParseListOfStringArrays(string input)
         {
             List<string[]> ReturnList = new List<string[]>();
             string[] RawInstructions = input.Split(new[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -54,7 +54,7 @@ namespace Advent2021
             }
             return ReturnList;
         }
-        public List<string[]> parseListOfStringArrays2(string input)
+        public List<string[]> ParseListOfStringArrays2(string input)
         {
             List<string[]> ReturnList = new List<string[]>();
             string[] RawInstructions = input.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -64,7 +64,7 @@ namespace Advent2021
             }
             return ReturnList;
         }
-        public List<List<int>> parseListOfIntegerLists(string input)
+        public List<List<int>> ParseListOfIntegerLists(string input)
         {
             List<List<int>> ReturnList = new List<List<int>>();
             string Input = input.Replace("\r\n", "_");
@@ -84,7 +84,7 @@ namespace Advent2021
             }
             return ReturnList;
         }
-        public List<int> parseListOfInteger(string input)
+        public List<int> ParseListOfInteger(string input)
         {
             List<int> ReturnList = new List<int>();
             MatchCollection Matches = Regex.Matches(input, @"-?\d+");
@@ -94,7 +94,7 @@ namespace Advent2021
             }
             return ReturnList;
         }
-        public List<long> parseListOfLong(string input)
+        public List<long> ParseListOfLong(string input)
         {
             List<long> ReturnList = new List<long>();
             MatchCollection Matches = Regex.Matches(input, @"-?\d+");

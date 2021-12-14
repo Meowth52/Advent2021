@@ -15,7 +15,7 @@ namespace Advent2021
         public Day11(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            string[] rows = this.parseStringArray(Input);
+            string[] rows = this.ParseStringArray(Input);
             Octopussy = new Dictionary<Coordinate, int>(); ;
             for (int y = 0; y < rows.Length; y++)
                 for (int x = 0; x < rows[0].Length; x++)
@@ -25,11 +25,11 @@ namespace Advent2021
                 OctoKeys.Add(c.Key);
             ReturnValue2 = 0;
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             int TotalFlashes = 0;
@@ -86,7 +86,7 @@ namespace Advent2021
             }
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = ReturnValue2;
 

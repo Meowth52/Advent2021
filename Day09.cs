@@ -14,7 +14,7 @@ namespace Advent2021
         public Day09(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            string[] strings = this.parseStringArray(Input);
+            string[] strings = this.ParseStringArray(Input);
             TheGrid = new Dictionary<Coordinate, int>();
             for (int x = 0; x < strings[0].Length; x++)
             {
@@ -24,11 +24,11 @@ namespace Advent2021
                 }
             }
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             Lowpoints = new List<Coordinate>();
@@ -50,7 +50,7 @@ namespace Advent2021
             }
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = 1;
             List<Coordinate> Avoid = new List<Coordinate>();

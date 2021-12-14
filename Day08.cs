@@ -14,13 +14,13 @@ namespace Advent2021
         public Day08(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.parseStringArray(Input);
+            Instructions = this.ParseStringArray(Input);
         }
-        public override Tuple<string, string> getResult()
+        public override Tuple<string, string> GetResult()
         {
-            return Tuple.Create(getPartOne(), getPartTwo());
+            return Tuple.Create(GetPartOne(), GetPartTwo());
         }
-        public string getPartOne()
+        public string GetPartOne()
         {
             int ReturnValue = 0;
             Strings = new List<(string[] Key, string[] Value)>();
@@ -42,7 +42,7 @@ namespace Advent2021
             }
             return ReturnValue.ToString();
         }
-        public string getPartTwo()
+        public string GetPartTwo()
         {
             int ReturnValue = 0;
             foreach ((string[] Key, string[] Value) s in Strings)
