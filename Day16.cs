@@ -124,12 +124,12 @@ namespace Advent2021
                 switch (this.Type)
                 {
                     case 0:
-                        foreach (int i in Values)
+                        foreach (long i in Values)
                             ReturnValue += i;
                         break;
                     case 1:
                         ReturnValue = 1;
-                        foreach (int i in Values)
+                        foreach (long i in Values)
                             ReturnValue *= i;
                         break;
                     case 2:
