@@ -9,11 +9,15 @@ namespace Advent2021
 {
     public class Day17 : Day
     {
-        List<int> Instructions;
+        (int Max, int Min) XLimits;
+        (int Max, int Min) YLimits;
         public Day17(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
-            Instructions = this.ParseListOfInteger(Input);
+            List<int> Instructions = this.ParseListOfInteger(Input);
+            XLimits = (Instructions[0], Instructions[1]);
+            YLimits = (Instructions[2], Instructions[3]);
+            ;
         }
         public override Tuple<string, string> GetResult()
         {
@@ -30,6 +34,32 @@ namespace Advent2021
             int ReturnValue = 0;
 
             return ReturnValue.ToString();
+        }
+        public int MaxX((int Max, int Min) Limits)
+        {
+            int ReturnValue = 0;
+            while ()
+            {
+                int x = ReturnValue;
+                while ()
+                {
+
+                }
+            }
+            return ReturnValue;
+        }
+        public int MaxY((int Max, int Min) Limits)
+        {
+            int ReturnValue = 0;
+            while ()
+            {
+                int y = ReturnValue;
+                while ()
+                {
+
+                }
+            }
+            return ReturnValue;
         }
     }
 }
