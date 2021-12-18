@@ -9,15 +9,14 @@ namespace Advent2021
 {
     public class Day17 : Day
     {
-        (int Max, int Min) XLimits;
-        (int Max, int Min) YLimits;
+        (int Min, int Max) XLimits;
+        (int Min, int Max) YLimits;
         public Day17(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
             List<int> Instructions = this.ParseListOfInteger(Input);
             XLimits = (Instructions[0], Instructions[1]);
             YLimits = (Instructions[2], Instructions[3]);
-            ;
         }
         public override Tuple<string, string> GetResult()
         {
@@ -26,7 +25,15 @@ namespace Advent2021
         public string GetPartOne()
         {
             int ReturnValue = 0;
-
+            for (int y = 100000; y > 0; y--)
+            {
+                ReturnValue = HitOnY(YLimits, y);
+                if (ReturnValue > 0)
+                    if (HitOnX(XLimits, y))
+                    {
+                        break;
+                    }
+            }
             return ReturnValue.ToString();
         }
         public string GetPartTwo()
@@ -35,30 +42,52 @@ namespace Advent2021
 
             return ReturnValue.ToString();
         }
-        public int MaxX((int Max, int Min) Limits)
+        public bool HitOnX((int Max, int Min) Limits, int y)
         {
-            int ReturnValue = 0;
-            while ()
+            bool Hit = false;
+            for (int i = 1; i <= Limits.Max; i++)
             {
-                int x = ReturnValue;
-                while ()
+                int xv = i;
+                int x = 0;
+                Hit = false;
+                for (int xi = 0; xi <= y; xi++)
                 {
-
+                    x += xv;
+                    if (xv > 0)
+                        xv--;
+                    else
+                        break;
+                    if (xi == y && x >= Limits.Min)
+                    {
+                        Hit = true;
+                        break;
+                    }
                 }
+                if (Hit)
+                    break;
             }
-            return ReturnValue;
+            return Hit;
         }
-        public int MaxY((int Max, int Min) Limits)
+        public int HitOnY((int Max, int Min) Limits, int Velocity)
         {
             int ReturnValue = 0;
-            while ()
+            int yv = Velocity;
+            bool Hit = false;
+            int y = 0;
+            while (y >= Limits.Max)
             {
-                int y = ReturnValue;
-                while ()
+                if (y <= Limits.Min)
                 {
-
+                    Hit = true;
+                    break;
                 }
+                y += yv;
+                yv--;
+                if (y >= ReturnValue)
+                    ReturnValue = y;
             }
+            if (!Hit)
+                ReturnValue = 0;
             return ReturnValue;
         }
     }
