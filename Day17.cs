@@ -11,14 +11,16 @@ namespace Advent2021
     {
         (int Min, int Max) XLimits;
         (int Min, int Max) YLimits;
-        int OwDamned;
+        List<int> OwDamned;
+        List<(int x, int y)> Hits;
         public Day17(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
             List<int> Instructions = this.ParseListOfInteger(Input);
             XLimits = (Instructions[0], Instructions[1]);
             YLimits = (Instructions[2], Instructions[3]);
-            OwDamned = 0;
+            OwDamned = new List<int>();
+            Hits = new List<(int x, int y)>();
         }
         public override Tuple<string, string> GetResult()
         {
@@ -31,7 +33,7 @@ namespace Advent2021
             {
                 ReturnValue = HitOnY(YLimits, y);
                 if (ReturnValue > 0)
-                    if (HitOnX(XLimits) > 0)
+                    if (HitOnX(XLimits, y) > 0)
                     {
                         break;
                     }
@@ -41,37 +43,40 @@ namespace Advent2021
         public string GetPartTwo()
         {
             int ReturnValue = 0;
-            int CeheckValue = 0;
+            int CheckValue = 0;
             for (int y = 10000; y > (YLimits.Min - 1); y--)
             {
-                CeheckValue = HitOnY(YLimits, y);
-                if (CeheckValue != 0)
+                CheckValue = HitOnY(YLimits, y);
+                if (CheckValue != 0)
                 {
-                    int well = HitOnX(XLimits);
-                    if (well > 0)
+                    int Hits = HitOnX(XLimits, nej y inte y v
                     {
-                        ReturnValue += well;
+                        ReturnValue += Hits;
                     }
                 }
             }
             return ReturnValue.ToString();
         }
-        public int HitOnX((int Min, int Max) Limits)
+        public int HitOnX((int Min, int Max) Limits, int y)
         {
             int Hit = 0;
-            for (int i = 1; i <= Limits.Max; i++)
+            foreach (int Ow in OwDamned)
             {
-                int xv = i;
-                int x = 0;
-                for (int xi = 0; xi <= OwDamned; xi++)
+                for (int i = 0; i <= Limits.Max; i++)
                 {
-                    if (xi == OwDamned && x >= Limits.Min && x <= Limits.Max)
+                    int xv = i;
+                    int x = 0;
+                    for (int xi = 0; xi <= Ow; xi++)
                     {
-                        Hit++;
+                        if (xi == Ow - 1 && x >= Limits.Min && x <= Limits.Max)
+                        {
+                            Hit++;
+                            Hits.Add((x, y));
+                        }
+                        x += xv;
+                        if (xv > 0)
+                            xv--;
                     }
-                    x += xv;
-                    if (xv > 0)
-                        xv--;
                 }
             }
             return Hit;
@@ -82,14 +87,15 @@ namespace Advent2021
             int yv = Velocity;
             bool Hit = false;
             int y = 0;
-            OwDamned = 0;
+            OwDamned = new List<int>();
+            int Ow = 0;
             while (y >= Limits.Min)
             {
-                OwDamned++;
+                Ow++;
                 if (y <= Limits.Max)
                 {
                     Hit = true;
-                    break;
+                    OwDamned.Add(Ow);
                 }
                 y += yv;
                 yv--;
