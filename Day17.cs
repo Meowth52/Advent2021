@@ -12,7 +12,7 @@ namespace Advent2021
         (int Min, int Max) XLimits;
         (int Min, int Max) YLimits;
         List<(int i, int y)> OwDamned;
-        List<(int x, int y)> Hits;
+        HashSet<(int x, int y)> Hits;
         public Day17(string _input) : base(_input)
         {
             string Input = this.CheckFile(_input);
@@ -20,7 +20,7 @@ namespace Advent2021
             XLimits = (Instructions[0], Instructions[1]);
             YLimits = (Instructions[2], Instructions[3]);
             OwDamned = new List<(int i, int y)>();
-            Hits = new List<(int x, int y)>();
+            Hits = new HashSet<(int x, int y)>();
         }
         public override Tuple<string, string> GetResult()
         {
@@ -49,12 +49,13 @@ namespace Advent2021
                 CheckValue = HitOnY(YLimits, y);
                 if (CheckValue != 0)
                 {
-                    int Hits = HitOnX(XLimits, y);
+                    int NumberOfHits = HitOnX(XLimits, y);
                     {
-                        ReturnValue += Hits;
+                        ;
                     }
                 }
             }
+            ReturnValue = Hits.Count;
             return ReturnValue.ToString();
         }
         public int HitOnX((int Min, int Max) Limits, int y)
