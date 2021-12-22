@@ -85,16 +85,14 @@ namespace Advent2021
                 ReturnCubes.Add(new Cube(x, MaxX, y, MaxY, z, MaxZ));
                 return ReturnCubes;
             }
-            public bool IsOverlap(Cube OtherCube)
-            {
-                return (OtherCube.MaxX >= this.MinX || OtherCube.MaxX <= this.MaxX) &&
-                    (OtherCube.MaxY >= this.MinY || OtherCube.MaxY <= this.MaxY) &&
-                    (OtherCube.MaxZ >= this.MinZ || OtherCube.MaxZ <= this.MaxZ);
-            }
-            public int FindOverlap(Cube OtherCube)
-            {
-                int X = OtherCube
-            }
+            //public List<(int x, int y,int z)> IsOverlap(Cube OtherCube)
+            //{
+
+            //}
+            //public int FindOverlap(Cube OtherCube)
+            //{
+            //    int X = OtherCube
+            //}
         }
     }
 }
