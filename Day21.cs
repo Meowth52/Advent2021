@@ -61,35 +61,69 @@ namespace Advent2021
             int OPlayer2 = Instructions[3];
             long Player1Wins = 0;
             long Player2Wins = 0;
-            int[] Dice = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-            for (int i = 0; i < Dice.Length; i++)
+            List<List<byte>> Dice = new List<List<byte>>();
+            Dice.Add(new List<byte>());
+            Dictionary<int, int> Odds = new Dictionary<int, int>()
             {
-                for (int ii = 1; ii <= 3; ii++)
+                {3,1 },
+                {4,3 },
+                {5,6 },
+                {6,7 },
+                {7,6 },
+                {8,3 },
+                {9,1 }
+            };
+            while (Dice.Count > 0)
+            {
+                List<List<byte>> NextDice = new List<List<byte>>();
+                foreach (List<byte> QuantumDirac in Dice)
                 {
-                    Dice[i] = ii;
-                    Player1 = OPlayer1;
-                    Player2 = OPlayer2;
-                    Score1 = 0;
-                    Score2 = 0;
-                    for (int d = 0; d < Dice.Length; d += 6)
+                    for (byte ii = 3; ii <= 9; ii++)
                     {
-                        Player1 = DiracRound(Player1, ref Dice, d);
-                        Score1 += Player1;
-                        if (Score1 >= 21)
+                        List<byte> NextList = new List<byte>(QuantumDirac);
+                        NextList.Add(ii);
+                        Player1 = OPlayer1;
+                        Player2 = OPlayer2;
+                        Score1 = 0;
+                        Score2 = 0;
+                        bool win = false;
+                        for (int schmii = 0; schmii < NextList.Count; schmii++)
                         {
-                            Player1Wins++;
-                            break;
+                            if (schmii % 2 == 0)
+                            {
+                                Player1 = DiracRound(Player1, NextList[schmii]);
+                                Score1 += Player1;
+                                if (Score1 >= 21)
+                                {
+                                    int scoresum = 1;
+                                    foreach (int s in NextList)
+                                        scoresum *= Odds[s]; // borde vara varannan men det är nått mer
+                                    Player1Wins += scoresum;
+                                    win = true;
+                                    break;
+                                }
+                            }
+                            else
+                            {
+
+                                Player2 = DiracRound(Player2, NextList[schmii]);
+                                Score2 += Player2;
+                                if (Score2 >= 21)
+                                {
+                                    int scoresum = 1;
+                                    foreach (int s in NextList)
+                                        scoresum *= Odds[s];
+                                    Player2Wins += scoresum;
+                                    win = true;
+                                    break;
+                                }
+                            }
                         }
-                        Player2 = DiracRound(Player2, ref Dice, d + 3);
-                        Score2 += Player2;
-                        if (Score2 >= 21)
-                        {
-                            Player2Wins++;
-                            break;
-                        }
+                        if (!win)
+                            NextDice.Add(NextList);
                     }
-                    ;
                 }
+                Dice = new List<List<byte>>(NextDice);
             }
             return Math.Max(Player1Wins, Player2Wins).ToString();
         }
@@ -102,13 +136,10 @@ namespace Advent2021
             Die = WieredModulus(Die, 100);
             return Player;
         }
-        public int DiracRound(int player, ref int[] Dice, int turn)
+        public int DiracRound(int player, int roll)
         {
             int Player = player;
-            for (int i = 0; i < 3; i++)
-            {
-                Player += Dice[turn + i];
-            }
+            Player += roll;
             Player = WieredModulus(Player, 10);
             return Player;
         }
