@@ -96,8 +96,9 @@ namespace Advent2021
                                 if (Score1 >= 21)
                                 {
                                     int scoresum = 1;
-                                    foreach (int s in NextList)
-                                        scoresum *= Odds[s]; // borde vara varannan men det är nått mer
+                                    for (int n = 0; n < NextList.Count; n++)
+                                        if (n % 2 == 0)
+                                            scoresum *= Odds[NextList[n]];
                                     Player1Wins += scoresum;
                                     win = true;
                                     break;
@@ -111,8 +112,9 @@ namespace Advent2021
                                 if (Score2 >= 21)
                                 {
                                     int scoresum = 1;
-                                    foreach (int s in NextList)
-                                        scoresum *= Odds[s];
+                                    for (int n = 0; n < NextList.Count; n++)
+                                        if (n % 2 == 1)
+                                            scoresum *= Odds[NextList[n]];
                                     Player2Wins += scoresum;
                                     win = true;
                                     break;
